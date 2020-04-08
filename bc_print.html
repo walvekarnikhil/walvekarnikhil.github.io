@@ -8,23 +8,7 @@
         document.getElementById("print1").addEventListener('click', () => {
           var popupWin = window.open("", "_blank", "top=0,left=0,height=auto,width=auto");
           popupWin.document.open();
-          popupWin.document.write(`
-            <html>
-              <body>
-                <script defer>
-                  function triggerPrint(event) {
-                    window.removeEventListener('load', triggerPrint, false);
-                    setTimeout(() => {
-                      var xhr = new XMLHttpRequest();
-                      xhr.open('POST', 'http://192.168.1.193:9100');
-                      xhr.send('^XA ^FX Top section with company logo, name and address. ^CF0,30 ^FO30,30^FDSample #: S1234567^FS ^FO30,60^BY3 ^BCN,80,N ^FDS1234567^FS ^CF0,30 ^FO30,150^FDName:^FS ^FO30,185^FDDOB:^FS ^FO30,220^FDSpecimen ID:^FS ^FO30,250^FDAgency#/Spec. ID:^FS ^FO30,285^FDComment:^FS ^XZ');
-                      setTimeout(function() { window.close(); }, 0);
-                    }, 0);
-                  }
-                  window.addEventListener('load', triggerPrint, false);
-                </script>
-              </body>
-            </html>`);
+          popupWin.document.write(`<html> <body> <script defer> function triggerPrint(event) { window.removeEventListener('load', triggerPrint, false); setTimeout(() => { var xhr = new XMLHttpRequest(); xhr.open('POST', 'http://192.168.1.193:9100'); xhr.send('^XA ^FX Top section with company logo, name and address. ^CF0,30 ^FO30,30^FDSample #: S1234567^FS ^FO30,60^BY3 ^BCN,80,N ^FDS1234567^FS ^CF0,30 ^FO30,150^FDName:^FS ^FO30,185^FDDOB:^FS ^FO30,220^FDSpecimen ID:^FS ^FO30,250^FDAgency#/Spec. ID:^FS ^FO30,285^FDComment:^FS ^XZ'); setTimeout(function() { window.close(); }, 0); }, 0); } window.addEventListener('load', triggerPrint, false);</script></body></html>`);
           popupWin.document.close();
         })
     </script>
