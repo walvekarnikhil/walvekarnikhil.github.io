@@ -123,7 +123,7 @@
       <div><label for="charger">Charger</label><select id="charger"></select></div>
     </div>
     <div class="row one" style="margin-bottom:0">
-      <div><label for="tariff">Electricity rate (₹ per unit)</label><input id="tariff" type="number" min="0" step="0.5" value="10" inputmode="decimal"></div>
+      <div><label for="tariff">Electricity rate (₹ per unit)</label><input id="tariff" type="number" min="0" step="0.5" value="20" inputmode="decimal"></div>
     </div>
   </div>
 
@@ -311,6 +311,11 @@ brandEl.addEventListener("change", ()=>{ modelEl.value=0; fillModels(); });
 modelEl.addEventListener("change", fillVariants);
 [variantEl, chargerEl].forEach(el=>el.addEventListener("change", update));
 [socEl, targetEl, tariffEl, customKwh].forEach(el=>el.addEventListener("input", update));
+
+// Remember the electricity rate on this device
+const RATE_KEY="evcalc.tariff";
+try{ const r=localStorage.getItem(RATE_KEY); if(r!==null && r!=="" && isFinite(+r)) tariffEl.value=r; }catch(e){}
+tariffEl.addEventListener("input", ()=>{ try{ const v=tariffEl.value; if(v!=="" && isFinite(+v)) localStorage.setItem(RATE_KEY,v); }catch(e){} });
 
 fillModels();
 $("jump").addEventListener("click", e=>{ e.preventDefault(); $("resultCard").scrollIntoView({behavior:"smooth"}); });
